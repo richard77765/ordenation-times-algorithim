@@ -9,7 +9,9 @@ void insertionSort(std::vector<int>& a);
 void selectionSort(std::vector<int>& a);
 void quickSort(std::vector<int>& a, int i, int f);
 void mergeSort(std::vector<int>& a, int n);
-
+void search(const std::vector<int>& a);
+void buscaSequencial(const std::vector<int>& arr, int alvo, int& resultado);
+void buscaBinaria(const std::vector<int>& arr, int alvo, int& resultado);
 // ... implemente as funções aqui conforme os slides ...
 
 #endif
