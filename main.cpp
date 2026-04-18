@@ -14,6 +14,19 @@ vector<int> gerarVetor(int n) {
     return v;
 }
 
+void bubbleSort(vector<int>& a) {
+    int n = a.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = n-1; j > i; j--) {
+            if (a[j] > a[j-1]) {
+                int aux = a[j-1];
+                a[j-1] = a[j];
+                a[j] = aux;
+            }
+        }
+    }
+}
+
 double medirTempo(void (*algoritmo)(vector<int>&), int n) {
     double totalTime = 0;
     for(int i = 0; i < 30; i++) {
