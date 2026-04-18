@@ -38,7 +38,7 @@ Gere um gráfico de linhas relacionando o **Tamanho do Vetor (Eixo X)** com o **
 
 ## 5. Tabela de Resultados (Sugestão)
 ### Detalhe da estrutura dos teste
-* cada teste nos algoritimos de ordenação será executado 16/30 = 480x
+* cada teste nos algoritimos de ordenação será executado 16/30 = 480x (iterações)
 * poderiamos salvar a seed junto com o tempo mas como sabemos qual a seed usar previamente podemos salvar apenas uma matriz(vetor de vetore)
   
 ### Funções:
