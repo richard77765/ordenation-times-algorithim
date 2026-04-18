@@ -1,7 +1,35 @@
-Exercício
+# Exercício: Relatório de Desempenho de Algoritmos de Ordenação
 
-● Fazer um Relatório com os tempos dos algoritmos de ordenação /n
-● Devem ser testados vetores de tamanhos de 5000 a 20000 com passo 1000 \n
-● Usem Números Aleatórios para preencher os vetores [0,100000] \n
-● Para cada tamanho faça uma média de 30 execuções \n
-● Gere um Gráfico com as médias de todos os algoritmos \n
+## 1. Objetivo
+Desenvolver um relatório técnico comparando o tempo de execução de diferentes algoritmos de ordenação sob condições controladas.
+
+---
+
+## 2. Parâmetros dos Testes
+Para a realização do experimento, devem ser seguidos os seguintes critérios:
+
+* **Tamanho dos Vetores:** De 5.000 a 20.000 elementos.
+* **Passo de Incremento:** 1.000 elementos (ex: 5.000, 6.000, 7.000...).
+* **Dados de Entrada:** Vetores preenchidos com **números aleatórios** no intervalo $[0, 100.000]$.
+* **Amostragem:** Realizar uma média de **30 execuções** para cada tamanho de vetor.
+
+---
+
+## 3. Requisitos da Entrega
+
+### 📊 Relatório Técnico
+O documento deve conter a descrição dos algoritmos utilizados, a metodologia aplicada e as tabelas com os tempos médios coletados.
+
+### 📈 Análise Gráfica
+Gere um gráfico de linhas relacionando o **Tamanho do Vetor (Eixo X)** com o **Tempo Médio de Execução (Eixo Y)**. O gráfico deve conter as curvas de todos os algoritmos testados para fins de comparação.
+
+---
+
+## 4. Tabela de Resultados (Sugestão)
+
+| Tamanho do Vetor | Algoritmo A (ms) | Algoritmo B (ms) | Algoritmo C (ms) |
+| :--- | :--- | :--- | :--- |
+| 5.000 | | | |
+| 6.000 | | | |
+| ... | | | |
+| 20.000 | | | |
