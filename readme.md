@@ -34,13 +34,15 @@ Gere um gráfico de linhas relacionando o **Tamanho do Vetor (Eixo X)** com o **
 | ... | | | |
 | 20.000 | | | |
 
+---
+
 ## 5. Tabela de Resultados (Sugestão)
-Detalhe da estrutura dos teste
+###Detalhe da estrutura dos teste
 * cada teste nos algoritimos de ordenação será executado 16/30 = 480x
 * poderiamos salvar a seed junto com o tempo mas como sabemos qual a seed usar previamente podemos salvar apenas uma matriz(vetor de vetore)
   
-* Funções:
+### Funções:
 * Cria um novo vetor com valor do passo incrementando no valor
 * Preenche o vetor com numeros aleatorios de 0 a 100000 respeitando a seed
 * Salva o tempo de execução em uma matriz 16x30 respeitando cada iteração e depois exporta em txt a matriz 
-*
+
