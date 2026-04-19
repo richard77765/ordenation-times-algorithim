@@ -4,8 +4,43 @@
 #include <ctime>
 #include <fstream>
 #include "algoritmos.hpp"
+#include <fstream>
 
 using namespace std;
+
+// Definição de um tipo para facilitar a leitura: 
+// Uma função que recebe dois ints e retorna um int
+typedef int (*EstrategiaCalculo)(int, int);
+
+// Função de processar o alg e salvar o tempo na matriz
+void processarESalvarMatriz(vector<vector<int>>& mat, EstrategiaCalculo algoritmo, string nomeArquivo) {
+    int linhas = mat.size();
+    int colunas = mat[0].size();
+
+    ofstream arquivo(nomeArquivo);
+
+    if (arquivo.is_open()) {
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                mat[i][j] = algoritmo(i, j); // Chama a função recebida por parâmetro
+                arquivo << mat[i][j] << (j == colunas - 1 ? "" : ",");// Salva no arquivo
+            }
+            arquivo << "\n";
+        }
+        arquivo.close();
+        cout << "Arquivo " << nomeArquivo << " gerado com sucesso!" << endl;
+    }
+}
+
+int somaIndices(int a, int b) {
+    return a + b;
+}
+
+int multiplicaIndices(int a, int b) {
+    return a * b;
+}
+
+//-----------------------------------------------------------------------------
 
 // Função para gerar vetor aleatório
 vector<int> gerarVetor(int n) {
@@ -40,26 +75,15 @@ double medirTempo(void (*algoritmo)(vector<int>&), int n) {
 }
 
 int main() {
-    srand(time(NULL));
-    ofstream arquivo("resultados.csv");
-    
-    // Cabeçalho do CSV
-    arquivo << "n,bubble,insertion,selection,quick,merge" << endl;
+    const int L = 30;
+    const int C = 16;
+    vector<vector<int>> matriz(L, vector<int>(C, 0));
 
-    for(int n = 5000; n <= 20000; n += 1000) {
-        cout << "Testando n = " << n << "..." << endl;
-        
-        double tBubble = medirTempo(bubbleSort, n);
-        double tInsert = medirTempo(insertionSort, n);
-        double tSelect = medirTempo(selectionSort, n);
-        
-        // Para Quick e Merge que pedem parâmetros extras, 
-        // você pode criar um "wrapper" ou ajustar a medirTempo
-        
-        arquivo << n << "," << tBubble << "," << tInsert << "," << tSelect << endl;
-    }
+    // Função processarESalvarMatriz com somaIndices como parametro
+    processarESalvarMatriz(matriz, somaIndices, "soma.csv");
 
-    arquivo.close();
-    cout << "Testes concluídos! Dados salvos em resultados.csv" << endl;
+    // Função processarESalvarMatriz com multiplicaIndices como parametro
+    processarESalvarMatriz(matriz, multiplicaIndices, "multiplicacao.csv");
+
     return 0;
 }
