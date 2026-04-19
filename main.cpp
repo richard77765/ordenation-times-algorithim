@@ -1,89 +1,57 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <cstdlib>
 #include <ctime>
 #include <fstream>
 #include "algoritmos.hpp"
-#include <fstream>
+
+#include <iostream>
+#include <vector>
+#include <cstdlib>
 
 using namespace std;
 
-// Definição de um tipo para facilitar a leitura: 
-// Uma função que recebe dois ints e retorna um int
-typedef int (*EstrategiaCalculo)(int, int);
+// 1. Array de 16 seeds fixas (escolhidas arbitrariamente)
+const unsigned int SEEDS[16] = {
+    42, 123, 777, 999, 10, 55, 88, 101, 
+    202, 303, 404, 505, 606, 707, 808, 909
+};
 
-// Função de processar o alg e salvar o tempo na matriz
-void processarESalvarMatriz(vector<vector<int>>& mat, EstrategiaCalculo algoritmo, string nomeArquivo) {
-    int linhas = mat.size();
-    int colunas = mat[0].size();
+// 2. Função que gera o vetor baseado no índice do teste
+vector<int> gerarVetorPorIndice(int indiceNoLoop, int tamanho) {
+    // Sempre usará a mesma seed para o mesmo tamanho de vetor
+    srand(SEEDS[indiceNoLoop]); 
 
-    ofstream arquivo(nomeArquivo);
-
-    if (arquivo.is_open()) {
-        for (int i = 0; i < linhas; i++) {
-            for (int j = 0; j < colunas; j++) {
-                mat[i][j] = algoritmo(i, j); // Chama a função recebida por parâmetro
-                arquivo << mat[i][j] << (j == colunas - 1 ? "" : ",");// Salva no arquivo
-            }
-            arquivo << "\n";
-        }
-        arquivo.close();
-        cout << "Arquivo " << nomeArquivo << " gerado com sucesso!" << endl;
+    vector<int> v(tamanho);
+    for (int i = 0; i < tamanho; i++) {
+        v[i] = rand() % 100001;
     }
-}
-
-int somaIndices(int a, int b) {
-    return a + b;
-}
-
-int multiplicaIndices(int a, int b) {
-    return a * b;
-}
-
-//-----------------------------------------------------------------------------
-
-// Função para gerar vetor aleatório
-vector<int> gerarVetor(int n) {
-    vector<int> v(n);
-    for(int i = 0; i < n; i++) v[i] = rand() % 100001;
     return v;
 }
 
-void bubbleSort(vector<int>& a) {
-    int n = a.size();
-    for (int i = 0; i < n; i++) {
-        for (int j = n-1; j > i; j--) {
-            if (a[j] > a[j-1]) {
-                int aux = a[j-1];
-                a[j-1] = a[j];
-                a[j] = aux;
-            }
-        }
-    }
-}
+void executarExperimento() {
+    const int inicio = 5000;
+    const int passo = 1000;
 
-double medirTempo(void (*algoritmo)(vector<int>&), int n) {
-    double totalTime = 0;
-    for(int i = 0; i < 30; i++) {
-        vector<int> v = gerarVetor(n);
-        clock_t t1 = clock();
-        algoritmo(v);
-        clock_t t2 = clock();
-        totalTime += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
+    // Loop pelos 16 tamanhos (5k a 20k)
+    for (int i = 0; i < 16; i++) {
+        int n = inicio + (i * passo);
+
+        // Este vetor será IDENTICO para todos os 8 algoritmos 
+        // toda vez que você rodar o programa.
+        vector<int> vetorBase = gerarVetorPorIndice(i, n);
+
+        cout << "Tamanho: " << n << " | Seed: " << SEEDS[i] << " | Primeiro: " << vetorBase[0] << endl;
+
+        /* funcCronometro(vetor1, funcBuscaX1)
+           funcCronometro(vetor2, funcBuscaX2)
+           ...
+        */
     }
-    return totalTime / 30.0;
 }
 
 int main() {
-    const int L = 30;
-    const int C = 16;
-    vector<vector<int>> matriz(L, vector<int>(C, 0));
-
-    // Função processarESalvarMatriz com somaIndices como parametro
-    processarESalvarMatriz(matriz, somaIndices, "soma.csv");
-
-    // Função processarESalvarMatriz com multiplicaIndices como parametro
-    processarESalvarMatriz(matriz, multiplicaIndices, "multiplicacao.csv");
-
+    executarExperimento();
     return 0;
 }
