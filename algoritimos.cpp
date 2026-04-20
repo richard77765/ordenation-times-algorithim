@@ -93,7 +93,8 @@ int particao(int* a, int l, int r) {
     int aux;
     
     while (i < j) {
-        while (a[i] <= pivo) {
+        // Correção: a trava 'i <= r' impede o acesso indevido à memória
+        while (i <= r && a[i] <= pivo) {
             i++;
         }
         while (a[j] > pivo && j != l) {
