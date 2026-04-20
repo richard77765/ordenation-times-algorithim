@@ -4,11 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
-#include "algoritmos.hpp"
-
-#include <iostream>
-#include <vector>
-#include <cstdlib>
+#include "algoritmos.hpp" // Importa suas ordenações e buscas
+#include "utils.hpp"      // Importa o cronômetro e gerador de vetor
 
 using namespace std;
 

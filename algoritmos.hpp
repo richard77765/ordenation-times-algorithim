@@ -1,17 +1,15 @@
 #ifndef ALGORITMOS_HPP
 #define ALGORITMOS_HPP
 
-#include <vector>
+// Algoritmos de Ordenação
+void bubbleSort(int* a, int n);
+void insertionSort(int* a, int n);
+void selectionSort(int* a, int n);
+void mergeSort(int* a, int n);
+void quickSort(int* a, int n);
 
-// Use std::vector para facilitar a manipulação de memória em C++
-void bubbleSort(std::vector<int>& a);
-void insertionSort(std::vector<int>& a);
-void selectionSort(std::vector<int>& a);
-void quickSort(std::vector<int>& a, int i, int f);
-void mergeSort(std::vector<int>& a, int n);
-void search(const std::vector<int>& a);
-void buscaSequencial(const std::vector<int>& arr, int alvo, int& resultado);
-void buscaBinaria(const std::vector<int>& arr, int alvo, int& resultado);
-// ... implemente as funções aqui conforme os slides ...
+// Algoritmos de Busca
+bool buscaSequencial(int *a, int n, int k);
+bool buscaBinaria(int *a, int l, int r, int k);
 
 #endif
