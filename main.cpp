@@ -10,8 +10,6 @@
 
 using namespace std;
 
-#define STRESS_FACTOR 10000
-
 const unsigned int SEEDS[30] = {
     42, 123, 777, 999, 10, 55, 88, 101, 
     202, 303, 404, 505, 606, 707, 808, 909, 
@@ -83,19 +81,18 @@ void executarExperimento() {
             int k = rand() % 100001; 
             clock_t t1, t2;
 
+            // Busca Sequencial — vetor não precisa estar ordenado
+            vector<int> vSeq = vetorBase;
             t1 = clock();
-            for (int s = 0; s < STRESS_FACTOR; s++) {
-                buscaSequencial(vQuick.data(), n, k);
-            }
+            buscaSequencial(vSeq.data(), n, k);
             t2 = clock();
-            tot_seq += (((double)(t2 - t1)) / CLOCKS_PER_SEC) / STRESS_FACTOR;
+            tot_seq += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
 
+            // Busca Binária — usa vQuick que já está ordenado pelo quickSort acima
             t1 = clock();
-            for (int s = 0; s < STRESS_FACTOR; s++) {
-                buscaBinaria(vQuick.data(), 0, n - 1, k);
-            }
+            buscaBinaria(vQuick.data(), 0, n - 1, k);
             t2 = clock();
-            tot_bin += (((double)(t2 - t1)) / CLOCKS_PER_SEC) / STRESS_FACTOR;
+            tot_bin += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
         }
 
         double med_bub = tot_bubble / repeticoes;
