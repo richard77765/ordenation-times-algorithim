@@ -1,7 +1,5 @@
 #include "algoritmos.hpp"
 
-//Algoritimos de Ordenação _________________________________________________________________________________________________
-// Implementação do algorítimo de ordenação Bubble Sort
 void bubbleSort(int* a, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = n - 1; j > i; j--) {
@@ -14,7 +12,7 @@ void bubbleSort(int* a, int n) {
     }
 }
 
-// Implementação do algorítimo de ordenação Busca Binária
+
 void insertionSort(int* a, int n) {
     for (int i = 1; i < n; i++) {
         int e = a[i];
@@ -27,7 +25,7 @@ void insertionSort(int* a, int n) {
     }
 }
 
-// Implementação do algorítimo de ordenação Selection Sort
+
 void selectionSort(int* a, int n) {
     for (int i = 0; i < n - 1; i++) {
         int min = i;
@@ -42,7 +40,7 @@ void selectionSort(int* a, int n) {
     }
 }
 
-// Implementação do algorítimo de ordenação Merge Sort 
+
 void merge(int* a, int ini, int fim, int meio) {
     int pos1 = ini;
     int pos2 = meio + 1;
@@ -85,7 +83,7 @@ void mergeSort(int* a, int n) {
     msaux(a, 0, n - 1);
 }
 
-// Implementação do algorítimo de ordenação Quick Sort
+
 int particao(int* a, int l, int r) {
     int pivo = a[l];
     int i = l;
@@ -93,7 +91,7 @@ int particao(int* a, int l, int r) {
     int aux;
     
     while (i < j) {
-        // Correção: a trava 'i <= r' impede o acesso indevido à memória
+
         while (i <= r && a[i] <= pivo) {
             i++;
         }
@@ -105,14 +103,14 @@ int particao(int* a, int l, int r) {
             a[i] = a[j];
             a[j] = aux;
         }
-    } //while
+    } 
     
     aux = a[j];
     a[j] = a[l];
     a[l] = aux;
     
     return j;
-} //particao
+} 
 
 void qsAux(int* a, int i, int f) {
     if (i < f) {
@@ -126,8 +124,7 @@ void quickSort(int* a, int n) {
     qsAux(a, 0, n - 1);
 }
 
-//Algoritimos de busca ___________________________________________________________________________________________________
-//Algorítimo de Busca Sequencial
+
 bool buscaSequencial(int *a, int n, int k) {
     for(int i = 0; i < n; i++)
         if(a[i] == k) return true;
@@ -135,7 +132,6 @@ bool buscaSequencial(int *a, int n, int k) {
     return false;
 }
 
-//Algorítimo de Busca Binária
 bool buscaBinaria(int *a, int l, int r, int k) {
     int m = (l + r) / 2;
     if (a[m] == k) {

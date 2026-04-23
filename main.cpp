@@ -12,9 +12,11 @@ using namespace std;
 
 #define STRESS_FACTOR 10000
 
-const unsigned int SEEDS[16] = {
+const unsigned int SEEDS[30] = {
     42, 123, 777, 999, 10, 55, 88, 101, 
-    202, 303, 404, 505, 606, 707, 808, 909
+    202, 303, 404, 505, 606, 707, 808, 909, 
+    143, 232, 365, 474 , 535, 676, 767, 
+    897, 976, 105, 117, 126, 153, 144
 };
 
 vector<int> gerarVetorPorIndice(int indiceNoLoop, int tamanho) {
@@ -59,7 +61,7 @@ void executarExperimento() {
         double tot_seq = 0.0, tot_bin = 0.0;
 
         for (int exec = 0; exec < repeticoes; exec++) {
-            srand(SEEDS[i] + exec);
+            srand(exec);
             vector<int> vetorBase(n);
             for (int x = 0; x < n; x++) vetorBase[x] = rand() % 100001;
 
