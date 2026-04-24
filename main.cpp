@@ -88,9 +88,9 @@ void executarExperimento() {
             t2 = clock();
             tot_seq += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
 
-            // Busca Binária — usa vQuick que já está ordenado pelo quickSort acima
+            // Busca Binária — vetor DESORDENADO (vSeq)
             t1 = clock();
-            buscaBinaria(vQuick.data(), 0, n - 1, k);
+            buscaBinaria(vSeq.data(), 0, n - 1, k);
             t2 = clock();
             tot_bin += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
         }
