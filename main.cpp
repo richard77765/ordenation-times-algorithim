@@ -6,9 +6,20 @@
 #include <fstream>
 #include <iomanip>        // <-- Nova biblioteca para formatar a tabela
 #include "algoritmos.hpp" 
-#include "utils.hpp"      
+//#include "utils.hpp"      
 
 using namespace std;
+
+// 1. Cronômetro Universal
+template <typename Func, typename... Args>
+double medirTempo(Func algoritmo, Args... argumentos) {
+    clock_t t1 = clock();
+    algoritmo(argumentos...);
+    clock_t t2 = clock();
+    return ((double)(t2 - t1)) / CLOCKS_PER_SEC;
+}
+
+
 
 const unsigned int SEEDS[30] = {
     42, 123, 777, 999, 10, 55, 88, 101, 
