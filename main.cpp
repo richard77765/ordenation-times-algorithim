@@ -90,7 +90,7 @@ void executarExperimento() {
 
             // Busca Binária — vetor DESORDENADO (vSeq)
             t1 = clock();
-            buscaBinaria(vSeq.data(), 0, n - 1, k);
+            buscaBinaria(vQuick.data(), 0, n - 1, k);
             t2 = clock();
             tot_bin += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
         }
