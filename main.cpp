@@ -43,6 +43,7 @@ void executarExperimento() {
     const int repeticoes = 30; 
 
     ofstream arquivoCSV("tempos_ordenacao_busca.csv");
+    arquivoCSV << fixed << setprecision(9);
     arquivoCSV << "Tamanho,BubbleSort,InsertionSort,SelectionSort,MergeSort,QuickSort,BuscaSequencial,BuscaBinaria\n";
 
     cout << "Iniciando experimento. Aguarde...\n\n";
@@ -136,6 +137,7 @@ void executarExperimento() {
 }
 
 int main() {
+    cout << "CLOCKS_PER_SEC = " << CLOCKS_PER_SEC << "\n";
     executarExperimento();
     return 0;
 }
