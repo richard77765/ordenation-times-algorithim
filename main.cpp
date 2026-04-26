@@ -1,12 +1,10 @@
 #include <iostream>
 #include <vector>
-#include <random>
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
-#include <iomanip>        // <-- Nova biblioteca para formatar a tabela
+#include <iomanip>
 #include "algoritmos.hpp" 
-//#include "utils.hpp"      
 
 using namespace std;
 
@@ -17,24 +15,6 @@ double medirTempo(Func algoritmo, Args... argumentos) {
     algoritmo(argumentos...);
     clock_t t2 = clock();
     return ((double)(t2 - t1)) / CLOCKS_PER_SEC;
-}
-
-
-
-const unsigned int SEEDS[30] = {
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-    11, 12, 13, 14, 15, 16, 17, 18,
-    19, 20, 21, 22, 23, 24, 25, 26, 
-    27, 28, 29, 30
-};
-
-vector<int> gerarVetorPorIndice(int indiceNoLoop, int tamanho) {
-    srand(SEEDS[indiceNoLoop]); 
-    vector<int> v(tamanho);
-    for (int i = 0; i < tamanho; i++) {
-        v[i] = rand() % 100001;
-    }
-    return v;
 }
 
 void executarExperimento() {
@@ -64,16 +44,15 @@ void executarExperimento() {
     cout << fixed << setprecision(6);
 
     for (int i = 0; i < 16; i++) {
-        int n = inicio + (i * passo);
+        int n = inicio + (i * passo); // definindo o tamanho do vetor para cada iteração
         
-        double tot_bubble = 0.0, tot_insertion = 0.0, tot_selection = 0.0;
-        double tot_merge = 0.0, tot_quick = 0.0;
-        double tot_seq = 0.0, tot_bin = 0.0;
+        double tot_bubble = 0.0, tot_insertion = 0.0, tot_selection = 0.0,
+         tot_merge = 0.0, tot_quick = 0.0, tot_seq = 0.0, tot_bin = 0.0;
 
         for (int exec = 0; exec < repeticoes; exec++) {
             srand(exec);
-            vector<int> vetorBase(n);
-            for (int x = 0; x < n; x++) vetorBase[x] = rand() % 100001;
+            vector<int> vetorBase(n); // criando o vetor com tamanho n
+            for (int x = 0; x < n; x++) vetorBase[x] = rand() % 100001; // insere números entre 0 e 100000 no vetor base
 
             vector<int> vBubble = vetorBase;
             tot_bubble += medirTempo(bubbleSort, vBubble.data(), n);
@@ -90,21 +69,14 @@ void executarExperimento() {
             vector<int> vQuick = vetorBase;
             tot_quick += medirTempo(quickSort, vQuick.data(), n);
 
-            int k = rand() % 100001; 
-            clock_t t1, t2;
+            int k = rand() % 100001;  // valor a ser buscado, entre 0 e 100000
 
             // Busca Sequencial — vetor não precisa estar ordenado
             vector<int> vSeq = vetorBase;
-            t1 = clock();
-            buscaSequencial(vSeq.data(), n, k);
-            t2 = clock();
-            tot_seq += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
+            tot_seq += medirTempo(buscaSequencial, vSeq.data(), n, k);
 
-            // Busca Binária — vetor DESORDENADO (vSeq)
-            t1 = clock();
-            buscaBinaria(vQuick.data(), 0, n - 1, k);
-            t2 = clock();
-            tot_bin += ((double)(t2 - t1)) / CLOCKS_PER_SEC;
+            // Busca Binária — vetor precisa estar ordenado
+            tot_bin += medirTempo(buscaBinaria, vQuick.data(), 0, n - 1, k);
         }
 
         double med_bub = tot_bubble / repeticoes;
@@ -137,7 +109,7 @@ void executarExperimento() {
 }
 
 int main() {
-    cout << "CLOCKS_PER_SEC = " << CLOCKS_PER_SEC << "\n";
+    //cout << "CLOCKS_PER_SEC = " << CLOCKS_PER_SEC << "\n";
     executarExperimento();
     return 0;
 }
