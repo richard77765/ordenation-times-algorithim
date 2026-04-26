@@ -22,10 +22,10 @@ double medirTempo(Func algoritmo, Args... argumentos) {
 
 
 const unsigned int SEEDS[30] = {
-    42, 123, 777, 999, 10, 55, 88, 101, 
-    202, 303, 404, 505, 606, 707, 808, 909, 
-    143, 232, 365, 474 , 535, 676, 767, 
-    897, 976, 105, 117, 126, 153, 144
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 12, 13, 14, 15, 16, 17, 18,
+    19, 20, 21, 22, 23, 24, 25, 26, 
+    27, 28, 29, 30
 };
 
 vector<int> gerarVetorPorIndice(int indiceNoLoop, int tamanho) {
