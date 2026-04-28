@@ -1,6 +1,6 @@
 #include "algoritmos.hpp"
 
-void bubbleSort(int* a, int n) {
+void algBubbleSort(int* a, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = n - 1; j > i; j--) {
             if (a[j] < a[j - 1]) {
@@ -13,7 +13,7 @@ void bubbleSort(int* a, int n) {
 }
 
 
-void insertionSort(int* a, int n) {
+void algInsertionSort(int* a, int n) {
     for (int i = 1; i < n; i++) {
         int e = a[i];
         int j = i - 1;
@@ -26,7 +26,7 @@ void insertionSort(int* a, int n) {
 }
 
 
-void selectionSort(int* a, int n) {
+void algSelectionSort(int* a, int n) {
     for (int i = 0; i < n - 1; i++) {
         int min = i;
         for (int j = i + 1; j < n; j++) {
@@ -41,7 +41,7 @@ void selectionSort(int* a, int n) {
 }
 
 
-void merge(int* a, int ini, int fim, int meio) {
+void algMerge(int* a, int ini, int fim, int meio) {
     int pos1 = ini;
     int pos2 = meio + 1;
     int posc = 0;
@@ -75,11 +75,11 @@ void msaux(int* a, int i, int f) {
         int meio = (f + i) / 2;
         msaux(a, i, meio);
         msaux(a, meio + 1, f);
-        merge(a, i, f, meio);
+        algMerge(a, i, f, meio);
     }
 }
 
-void mergeSort(int* a, int n) {
+void algMergeSort(int* a, int n) {
     msaux(a, 0, n - 1);
 }
 
@@ -120,28 +120,28 @@ void qsAux(int* a, int i, int f) {
     }
 }
 
-void quickSort(int* a, int n) {
+void algQuickSort(int* a, int n) {
     qsAux(a, 0, n - 1);
 }
 
 
-bool buscaSequencial(int *a, int n, int k) {
+bool algBuscaSeq(int *a, int n, int k) {
     for(int i = 0; i < n; i++)
         if(a[i] == k) return true;
 
     return false;
 }
 
-bool buscaBinaria(int *a, int l, int r, int k) {
+bool algBuscaBin(int *a, int l, int r, int k) {
     int m = (l + r) / 2;
     if (a[m] == k) {
         return true;
     }
     else if (l < r) {
         if (a[m] > k)
-            return buscaBinaria(a, l, m - 1, k);
+            return algBuscaBin(a, l, m - 1, k);
         else if (a[m] < k)
-            return buscaBinaria(a, m + 1, r, k);
+            return algBuscaBin(a, m + 1, r, k);
     }
     return false;
 }

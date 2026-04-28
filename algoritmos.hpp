@@ -2,14 +2,14 @@
 #define ALGORITMOS_HPP
 
 // Algoritmos de Ordenação
-void bubbleSort(int* a, int n);
-void insertionSort(int* a, int n);
-void selectionSort(int* a, int n);
-void mergeSort(int* a, int n);
-void quickSort(int* a, int n);
+void algBubbleSort(int* a, int n);
+void algInsertionSort(int* a, int n);
+void algSelectionSort(int* a, int n);
+void algMergeSort(int* a, int n);
+void algQuickSort(int* a, int n);
 
 // Algoritmos de Busca
-bool buscaSequencial(int *a, int n, int k);
-bool buscaBinaria(int *a, int l, int r, int k);
+bool algBuscaSeq(int *a, int n, int k);
+bool algBuscaBin(int *a, int l, int r, int k);
 
 #endif

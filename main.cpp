@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// 1. Cronômetro Universal
+// cronometro
 template <typename Func, typename... Args>
 double medirTempo(Func algoritmo, Args... argumentos) {
     clock_t t1 = clock();
@@ -24,11 +24,11 @@ void executarExperimento() {
 
     ofstream arquivoCSV("tempos_ordenacao_busca.csv");
     arquivoCSV << fixed << setprecision(9);
-    arquivoCSV << "Tamanho,BubbleSort,InsertionSort,SelectionSort,MergeSort,QuickSort,BuscaSequencial,BuscaBinaria\n";
+    arquivoCSV << "Tamanho,AlgBubbleSort,AlgInsertionSort,AlgSelectionSort,AlgMergeSort,AlgQuickSort,AlgBuscaSequencial,AlgBuscaBinaria\n";
 
     cout << "Iniciando experimento. Aguarde...\n\n";
 
-    // --- IMPRESSÃO DO CABEÇALHO DA TABELA NO TERMINAL ---
+    // impressao do header no terminal
     cout << left 
          << setw(10) << "Tamanho" << " | "
          << setw(10) << "Bubble"  << " | "
@@ -40,7 +40,7 @@ void executarExperimento() {
          << setw(10) << "B.Bin"   << "\n";
     cout << string(105, '-') << "\n";
 
-    // Configura o terminal para imprimir números float com 6 casas decimais fixas
+    // configura o terminal para retornar os segundos com 6 casas decimais 
     cout << fixed << setprecision(6);
 
     for (int i = 0; i < 16; i++) {
@@ -55,28 +55,26 @@ void executarExperimento() {
             for (int x = 0; x < n; x++) vetorBase[x] = rand() % 100001; // insere números entre 0 e 100000 no vetor base
 
             vector<int> vBubble = vetorBase;
-            tot_bubble += medirTempo(bubbleSort, vBubble.data(), n);
+            tot_bubble += medirTempo(algBubbleSort, vBubble.data(), n);
 
             vector<int> vInsert = vetorBase;
-            tot_insertion += medirTempo(insertionSort, vInsert.data(), n);
+            tot_insertion += medirTempo(algInsertionSort, vInsert.data(), n);
 
             vector<int> vSelect = vetorBase;
-            tot_selection += medirTempo(selectionSort, vSelect.data(), n);
+            tot_selection += medirTempo(algSelectionSort, vSelect.data(), n);
 
             vector<int> vMerge = vetorBase;
-            tot_merge += medirTempo(mergeSort, vMerge.data(), n);
+            tot_merge += medirTempo(algMergeSort, vMerge.data(), n);
 
             vector<int> vQuick = vetorBase;
-            tot_quick += medirTempo(quickSort, vQuick.data(), n);
+            tot_quick += medirTempo(algQuickSort, vQuick.data(), n);
 
-            int k = rand() % 100001;  // valor a ser buscado, entre 0 e 100000
+                int k = rand() % 100001;  // valor a ser buscado, entre 0 e 100000
 
-            // Busca Sequencial — vetor não precisa estar ordenado
             vector<int> vSeq = vetorBase;
-            tot_seq += medirTempo(buscaSequencial, vSeq.data(), n, k);
+            tot_seq += medirTempo(algBuscaSeq, vSeq.data(), n, k);
 
-            // Busca Binária — vetor precisa estar ordenado
-            tot_bin += medirTempo(buscaBinaria, vQuick.data(), 0, n - 1, k);
+            tot_bin += medirTempo(algBuscaBin, vQuick.data(), 0, n - 1, k);
         }
 
         double med_bub = tot_bubble / repeticoes;
@@ -87,7 +85,7 @@ void executarExperimento() {
         double med_seq = tot_seq / repeticoes;
         double med_bin = tot_bin / repeticoes;
 
-        // --- IMPRESSÃO DA LINHA DE DADOS NA TABELA ---
+        // impressao dos dados na tabela
         cout << left 
              << setw(10) << n       << " | "
              << setw(10) << med_bub << " | "
@@ -98,7 +96,7 @@ void executarExperimento() {
              << setw(10) << med_seq << " | "
              << setw(10) << med_bin << "\n";
 
-        // Escreve a mesma linha no CSV
+        // escreve a mesma linha no CSV
         arquivoCSV << n << "," << med_bub << "," << med_ins << "," << med_sel << "," 
                    << med_mer << "," << med_qui << "," << med_seq << "," << med_bin << "\n";
     }
